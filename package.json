@@ -1,0 +1,25 @@
+{
+  "name": "fullstack_project_services",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:web": "npm run dev -w apps/services_web",
+    "dev:api": "npm run dev -w apps/services_api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AthosChavesLopesdeAlmeida/Fullstack_Project_Services.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AthosChavesLopesdeAlmeida/Fullstack_Project_Services/issues"
+  },
+  "homepage": "https://github.com/AthosChavesLopesdeAlmeida/Fullstack_Project_Services#readme"
+}

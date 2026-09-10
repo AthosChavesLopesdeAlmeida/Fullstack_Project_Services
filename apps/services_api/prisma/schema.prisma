@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CLIENT
+  PROFESSIONAL
+}
+
+enum SlotStatus {
+  AVAILABLE
+  BOOKED
+  CANCELLED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  password     String
+  avatarUrl    String?
+  role         Role
+  createdAt    DateTime @default(now())
+
+  professional Professional? // presente apenas se role = PROFESSIONAL
+  bookings     Booking[]      // reservas feitas por este usuário (se cliente)
+}
+
+model Professional {
+  id          String @id @default(cuid())
+  userId      String @unique
+  user        User   @relation(fields: [userId], references: [id])
+
+  serviceName String
+  location    String
+  description String?
+
+  rules       AvailabilityRule[]
+  slots       Slot[]
+}
+
+model AvailabilityRule {
+  id             String   @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+
+  dayOfWeek      Int      // 0 (domingo) a 6 (sábado)
+  startTime      String   // "09:00" — ou minutos desde meia-noite
+  endTime        String   // "12:00"
+  slotDuration   Int      // duração de cada slot em minutos, ex: 30
+  price          Decimal
+  description    String?
+  active         Boolean  @default(true)
+
+  slots          Slot[]
+}
+
+model Slot {
+  id             String    @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+
+  ruleId         String?      // null se for um slot avulso, criado à mão
+  rule           AvailabilityRule? @relation(fields: [ruleId], references: [id])
+
+  date           DateTime     // data concreta, ex: 2026-09-14
+  startTime      DateTime     // timestamp completo (data + hora)
+  endTime        DateTime
+  price          Decimal
+  status         SlotStatus   @default(AVAILABLE)
+  description    String?
+
+  booking        Booking?
+
+  @@unique([professionalId, startTime]) // evita slots duplicados no mesmo horário
+}
+
+model Booking {
+  id        String   @id @default(cuid())
+  slotId    String   @unique
+  slot      Slot     @relation(fields: [slotId], references: [id])
+
+  clientId  String
+  client    User     @relation(fields: [clientId], references: [id])
+
+  createdAt DateTime @default(now())
+  status    String   @default("CONFIRMED") // CONFIRMED, CANCELLED, etc
+}
+
+
+/*
+A Regra de Disponibilidade é o padrão recorrente que o profissional define pra um dia da semana 
+(ex: toda segunda, 9h-12h, slots de 30min, com valor e descrição opcionais). 
+Ela não é reservável diretamente — serve como "molde" a partir do qual os Horários concretos (com data real) são gerados.
+*/
