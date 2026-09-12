@@ -72,15 +72,4 @@ export const userController = {
         res.json({ message: 'Successfully logged out' })
     },
 
-    async findByName (req: Request, res: Response) {
-        const { name } = req.body
-
-        try {
-            const users = await userService.findByName(name)
-            return res.json({ users })
-        } catch {
-            res.status(404).json({ error: 'No users found' })
-        }
-    }
-
 } 
