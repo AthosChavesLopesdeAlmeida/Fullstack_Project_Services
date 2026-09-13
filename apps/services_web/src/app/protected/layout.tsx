@@ -72,7 +72,7 @@ export default function ProtectedLayout({
 
   useEffect(() => {
     fetchUser()
-  })
+  }, [])
     
     return (
       <div className="flex min-h-screen">
@@ -107,7 +107,7 @@ export default function ProtectedLayout({
                     render={
                       <span onClick={() => router.push('/protected/next_bookings')}>
                         <CalendarDays />
-                        <span>Upcoming bookings</span>
+                        <span>Next bookings</span>
                       </span>
                     }
                     />
@@ -136,7 +136,7 @@ export default function ProtectedLayout({
                 <SidebarMenuItem>
                   <SidebarMenuButton onClick={() => router.push('/protected/availability_rules')} className="cursor-pointer">
                     <Pencil />
-                    <span>Manage availability rules</span>
+                    <span>Availability rules</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
 
@@ -185,12 +185,12 @@ export default function ProtectedLayout({
         <SidebarRail />
       </Sidebar>
 
-      <header className="flex h-14 items-center gap-2 px-4">
+      <header className="flex h-14 items-center">
         <SidebarTrigger className="cursor-pointer"/>
       </header>
-      </SidebarProvider>
 
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 pt-4">{children}</main>
+      </SidebarProvider>
     </div>
   );
 }

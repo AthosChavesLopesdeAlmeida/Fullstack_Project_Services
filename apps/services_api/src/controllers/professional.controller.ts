@@ -44,11 +44,14 @@ export const professionalController = {
     },
 
     async findByServiceName (req: Request, res: Response) {
-        const { serviceName } = req.body
-        
+        const { serviceName } = req.query
+        if (typeof serviceName !== 'string' || !serviceName.trim()) {
+            return res.status(400).json({ error: 'serviceName is required' })
+        }
+
         try {
-            const professionals = await professionalService.findByServiceName(serviceName)
-            return res.status(200).json({ professionals }) // pode vir vazio, e tudo bem
+            const { professionals } = await professionalService.findByServiceName(serviceName)
+            return res.status(200).json({ professionals })
         } catch {
             return res.status(500).json({ error: 'Internal server error' })
         }
