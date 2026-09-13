@@ -1,10 +1,14 @@
 'use client'
 
+import { useRouter } from "next/navigation";
+
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
+  const router = useRouter()
+
   return (
     <div className="flex flex-col min-h-screen items-center">
       <header className="w-full flex flex-row justify-center items-center px-20 py-6 bg-[#fcfcfc] sticky top-0 z-50">
@@ -22,8 +26,8 @@ export default function Home() {
           </h3>
 
           <div className="flex flex-row align-center justify-center text-center gap-1 pt-10">
-            <Button className="rounded-sm bg-[#3A7D44] cursor-pointer hover:opacity-80 hover:bg-[#3A7D44] w-50">Create your account</Button>
-            <Button className="rounded-sm bg-[#779CAB] cursor-pointer hover:opacity-80 hover:bg-[#779CAB] w-50">Or log into one</Button>
+            <Button className="rounded-sm bg-[#3A7D44] cursor-pointer hover:opacity-80 hover:bg-[#3A7D44] w-50" onClick={() => router.push('/register_user')}>Create your account</Button>
+            <Button className="rounded-sm bg-[#779CAB] cursor-pointer hover:opacity-80 hover:bg-[#779CAB] w-50" onClick={() => router.push('/login')}>Or log into one</Button>
           </div>
         </section>
 

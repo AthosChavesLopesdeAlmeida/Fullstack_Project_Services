@@ -63,17 +63,17 @@ const Page = () => {
                         <div className="flex flex-col gap-6">
                             <div className="grid gap-2">
                                 <Label htmlFor="serviceName">Service name</Label>
-                                <Input id="serviceName" type="text" onChange={(e) => setServiceName(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="Insert the name of your business"/>
+                                <Input required id="serviceName" type="text" onChange={(e) => setServiceName(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="Insert the name of your business"/>
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="location">Location</Label>
-                                <Input id="location" type="text" onChange={(e) => setLocation(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="Insert the location of your business"/>
+                                <Input required id="location" type="text" onChange={(e) => setLocation(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="Insert the location of your business"/>
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="description">Description</Label>
-                                <Input id="description" type="text" onChange={(e) => setDescription(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"  placeholder="Describe your business briefly (optional)"/>
+                                <Input required id="description" type="text" onChange={(e) => setDescription(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"  placeholder="Describe your business briefly (optional)"/>
                             </div>
 
                             {error && <p className="text-red-500 font-bold">{error}</p>}

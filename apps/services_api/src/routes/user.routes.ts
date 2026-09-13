@@ -11,4 +11,6 @@ router.delete('/delete', authMiddleware, userController.delete)
 
 router.post('/logout', userController.logout)
 
+router.get('/me', authMiddleware, userController.findById)
+
 export default router

@@ -42,4 +42,8 @@ export const userService = {
 
         await userRepository.delete(id)
     },
+
+    async findById (id: string) {
+        return userRepository.findById(id)
+    }
 }

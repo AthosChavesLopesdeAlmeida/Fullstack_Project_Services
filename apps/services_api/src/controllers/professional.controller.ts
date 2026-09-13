@@ -17,6 +17,10 @@ export const professionalController = {
         const userId  = req.userId!
         const { serviceName, location, description } = req.body
 
+        if (!serviceName || !location) {
+           return res.status(400).json({ error: 'Incomplete data' })            
+        }
+
         try {
             const { professional } = await professionalService.create(userId, serviceName, location, description)
             res.json({ professional: { 

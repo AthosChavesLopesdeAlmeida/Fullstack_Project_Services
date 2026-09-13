@@ -62,12 +62,12 @@ const Page = () => {
                         <div className="flex flex-col gap-6">
                             <div className="grid gap-2">
                                 <Label htmlFor="serviceName">Email</Label>
-                                <Input id="serviceName" type="text" onChange={(e) => setEmail(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="email@example.com"/>
+                                <Input id="serviceName" type="text" required onChange={(e) => setEmail(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="email@example.com"/>
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="location">Password</Label>
-                                <Input id="location" type="text" onChange={(e) => setPassword(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
+                                <Input id="location" type="text" required onChange={(e) => setPassword(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
                             </div>
 
                             {error && <p className="text-red-500 font-bold">{error}</p>}

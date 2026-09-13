@@ -77,22 +77,22 @@ const Page = () => {
                         <div className="flex flex-col gap-6">
                             <div className="grid gap-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input id="name" type="text" onChange={(e) => setName(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
+                                <Input required id="name" type="text" onChange={(e) => setName(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" onChange={(e) => setEmail(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="email@example.com"/>
+                                <Input required id="email" type="email" onChange={(e) => setEmail(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="email@example.com"/>
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
-                                <Input id="password" type="password" onChange={(e) => setPassword(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
+                                <Input required id="password" type="password" onChange={(e) => setPassword(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
                             </div>
 
                             <div className="grid gap-2">
                                 <Label htmlFor="pfpUrl">Profile Picture URL</Label>
-                                <Input id="pfpUrl" type="text" onChange={(e) => setPfpUrl(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="Insert the URL for your profile picture"/>
+                                <Input required id="pfpUrl" type="text" onChange={(e) => setPfpUrl(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white" placeholder="Insert the URL for your profile picture"/>
                             </div>
 
                             <div className="grid gap-2">

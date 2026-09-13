@@ -16,6 +16,10 @@ export const userController = {
         const { name, email, password, avatarUrl, role } = req.body 
         const isProduction = process.env.NODE_ENV === 'production'
 
+        if (!name || !email || !password || !avatarUrl || !role) {
+           return res.status(400).json({ error: 'Incomplete data' })
+        }
+
         try {
             const { token, user } = await userService.register(email, name, password, avatarUrl, role)
             res.cookie('token', token, {
@@ -35,6 +39,10 @@ export const userController = {
     async login (req: Request, res: Response) {
         const { email, password } = req.body
         const isProduction = process.env.NODE_ENV === 'production'
+
+        if (!email || !password) {
+           return res.status(400).json({ error: 'Incomplete data' })
+        }
 
         try {
             const { token, user } = await userService.login(email, password)
@@ -72,4 +80,18 @@ export const userController = {
         res.json({ message: 'Successfully logged out' })
     },
 
+    async findById (req: AuthRequest, res: Response) {
+        const userId = req.userId!
+
+        try {
+            const user = await userService.findById(userId);
+            if (!user) return res.status(404).json({ error: 'User not found' });
+            
+            return res.json({ 
+            user: { id: user.id, name: user.name, email: user.email, avatarUrl: user.avatarUrl, role: user.role } 
+            });
+        } catch {
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+    }
 } 
