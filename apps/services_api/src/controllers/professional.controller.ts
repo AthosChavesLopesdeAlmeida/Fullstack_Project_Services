@@ -30,25 +30,23 @@ export const professionalController = {
     },
 
     async delete (req: AuthRequest, res: Response) {
-        const userId  = req.userId!
-        const { id } = req.body
-
+        const userId = req.userId!
         try {
-            await professionalService.delete(id, userId)
-            res.status(204).send() 
+            await professionalService.delete(userId)
+            res.status(204).send()
         } catch {
-            res.status(401).json({ error: 'Unable to delete' })
+            res.status(404).json({ error: 'Professional account not found' })
         }
     },
 
     async findByServiceName (req: Request, res: Response) {
         const { serviceName } = req.body
-
+        
         try {
             const professionals = await professionalService.findByServiceName(serviceName)
-            res.json({ professionals })
+            return res.status(200).json({ professionals }) // pode vir vazio, e tudo bem
         } catch {
-            res.status(404).json({ message: 'No professionals found' })
+            return res.status(500).json({ error: 'Internal server error' })
         }
     }
 }
