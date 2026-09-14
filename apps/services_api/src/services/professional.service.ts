@@ -25,5 +25,11 @@ export const professionalService = {
         const professionals = await professionalRepository.findByServiceName(serviceName)
 
         return { professionals }
+    },
+
+    async findById (id: string) {
+        const professional = await professionalRepository.findById(id)
+
+        return professional 
     }
 }

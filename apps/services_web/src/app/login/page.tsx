@@ -67,7 +67,7 @@ const Page = () => {
 
                             <div className="grid gap-2">
                                 <Label htmlFor="location">Password</Label>
-                                <Input id="location" type="text" required onChange={(e) => setPassword(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
+                                <Input id="location" type="password" required onChange={(e) => setPassword(e.target.value)} className="rounded-sm border-black border-[0.5px] bg-white"/>
                             </div>
 
                             {error && <p className="text-red-500 font-bold">{error}</p>}

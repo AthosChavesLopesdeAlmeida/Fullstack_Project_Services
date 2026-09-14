@@ -2,7 +2,7 @@ import { prisma } from "../lib/prisma";
 
 export const professionalRepository = {
     findByUserId (userId: string) {
-        return prisma.professional.findUnique({ where: { userId } })
+        return prisma.professional.findUnique({ where: { userId }})
     },
     findById (id: string) {
         return prisma.professional.findUnique({ where: { id } })

@@ -93,5 +93,18 @@ export const userController = {
         } catch {
             return res.status(500).json({ error: 'Internal server error' });
         }
-    }
+    },
+
+    async findProfessionalPfpByUserId (req: Request, res: Response) {
+        const userId = req.params.userId as string
+
+        try {
+            const user = await userService.findById(userId);
+            if (!user) return res.status(404).json({ error: 'User not found' });
+            
+            return res.json({ avatarUrl: user.avatarUrl });
+        } catch {
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+    } 
 } 

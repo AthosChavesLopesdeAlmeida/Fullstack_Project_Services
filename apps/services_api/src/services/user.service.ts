@@ -44,6 +44,7 @@ export const userService = {
     },
 
     async findById (id: string) {
-        return userRepository.findById(id)
+        const user =  userRepository.findById(id)
+        return user
     }
 }

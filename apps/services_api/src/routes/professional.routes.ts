@@ -9,6 +9,7 @@ router.post('/create', authMiddleware, professionalController.create)
 router.post('/delete', authMiddleware, professionalController.delete)
 
 router.get('/findByServiceName', professionalController.findByServiceName)
+router.get('/:id', professionalController.findById)
 
 export default router
 

@@ -55,5 +55,19 @@ export const professionalController = {
         } catch {
             return res.status(500).json({ error: 'Internal server error' })
         }
+    },
+
+    async findById (req: Request, res: Response) {
+        const id = req.params.id as string
+        if (!id) {
+            return res.status(400).json({ error: 'Incomplete data' })
+        }
+
+        try {
+            const professional = await professionalService.findById(id)
+            return res.status(200).json({ professional })
+        } catch {
+            return res.status(500).json({ error: 'Internal server error' })
+        }
     }
 }
